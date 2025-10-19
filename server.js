@@ -8,8 +8,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    origin: ["https://autotyper-frontend-3gax.vercel.app","http://autotyper-frontend-3gax.vercel.app"], 
+    methods: ["GET", "POST"], // Only allow the methods you actually use
     credentials: true,
   })
 );
@@ -17,6 +17,10 @@ app.use(
 app.use(bodyParser.json());
 
 let currentJob = null;
+
+app.get("/", (req, res) => {
+  res.send({ message: "Backend is running" });
+});
 
 app.post("/start", async (req, res) => {
   const { text } = req.body;
